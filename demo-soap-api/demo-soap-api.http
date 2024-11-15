@@ -1,0 +1,6 @@
+@sprc_etl_file_publisher_HostAddress = http://localhost:5104
+
+GET {{sprc_etl_file_publisher_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
