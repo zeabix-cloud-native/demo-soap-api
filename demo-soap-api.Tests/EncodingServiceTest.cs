@@ -34,44 +34,44 @@ namespace DataEncodingApi.Tests
             Assert.Equal(expectedUtf8String, result);
         }
 
-        [Fact]
-        public void EncodeToTis620_ShouldReturnCorrectEncodedString()
-        {
-            // Arrange
-            var input = "สวัสดีชาวไทย";
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            var tis620 = Encoding.GetEncoding("TIS-620");
-            var utf8 = Encoding.UTF8;
+        // [Fact]
+        // public void EncodeToTis620_ShouldReturnCorrectEncodedString()
+        // {
+        //     // Arrange
+        //     var input = "สวัสดีชาวไทย";
+        //     Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        //     var tis620 = Encoding.GetEncoding("TIS-620");
+        //     var utf8 = Encoding.UTF8;
 
-            var tis620Bytes = tis620.GetBytes(input);
-            var utf8Bytes = Encoding.Convert(tis620, utf8, tis620Bytes);
-            var expectedUtf8String = Encoding.UTF8.GetString(utf8Bytes);
+        //     var tis620Bytes = tis620.GetBytes(input);
+        //     var utf8Bytes = Encoding.Convert(tis620, utf8, tis620Bytes);
+        //     var expectedUtf8String = Encoding.UTF8.GetString(utf8Bytes);
 
-            // Act
-            var result = ((IEncodingService)_controller).EncodeToTis620(input);
+        //     // Act
+        //     var result = ((IEncodingService)_controller).EncodeToTis620(input);
 
-            // Assert
-            Assert.Equal(expectedUtf8String, result);
-        }
+        //     // Assert
+        //     Assert.Equal(expectedUtf8String, result);
+        // }
 
-        [Fact]
-        public void ConvertTis620ToUtf8File_ShouldReturnFileContentResult()
-        {
-            // Act
-            var result = _controller.ConvertTis620ToUtf8File() as FileContentResult;
+        // [Fact]
+        // public void ConvertTis620ToUtf8File_ShouldReturnFileContentResult()
+        // {
+        //     // Act
+        //     var result = _controller.ConvertTis620ToUtf8File() as FileContentResult;
 
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal("text/plain; charset=utf-8", result.ContentType);
-            Assert.Equal("ConvertedToUtf8.txt", result.FileDownloadName);
+        //     // Assert
+        //     Assert.NotNull(result);
+        //     Assert.Equal("text/plain; charset=utf-8", result.ContentType);
+        //     Assert.Equal("ConvertedToUtf8.txt", result.FileDownloadName);
 
-            // Verify the file content
-            var utf8 = Encoding.UTF8;
-            var tis620 = Encoding.GetEncoding("TIS-620");
-            var tis620Bytes = tis620.GetBytes("สวัสดี");
-            var expectedUtf8Bytes = Encoding.Convert(tis620, utf8, tis620Bytes);
+        //     // Verify the file content
+        //     var utf8 = Encoding.UTF8;
+        //     var tis620 = Encoding.GetEncoding("TIS-620");
+        //     var tis620Bytes = tis620.GetBytes("สวัสดี");
+        //     var expectedUtf8Bytes = Encoding.Convert(tis620, utf8, tis620Bytes);
 
-            Assert.Equal(expectedUtf8Bytes, result.FileContents);
-        }
+        //     Assert.Equal(expectedUtf8Bytes, result.FileContents);
+        // }
     }
 }

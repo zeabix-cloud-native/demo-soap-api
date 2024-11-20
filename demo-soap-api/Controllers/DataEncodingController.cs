@@ -26,10 +26,10 @@ namespace DataEncodingApi.Controllers
             return EncodeUtf8Internal(input);
         }
 
-        string IEncodingService.EncodeToTis620(string input)
-        {
-            return EncodeTis620Internal(input);
-        }
+        // string IEncodingService.EncodeToTis620(string input)
+        // {
+        //     return EncodeTis620Internal(input);
+        // }
 
         [HttpPost("encodeToUtf8")]
         public IActionResult EncodeToUtf8()
@@ -57,18 +57,18 @@ namespace DataEncodingApi.Controllers
             return Encoding.UTF8.GetString(utf8Bytes);
         }
 
-        private string EncodeTis620Internal(string input)
-        {   
-            Encoding tis620 = Encoding.GetEncoding("TIS-620");
-            Encoding utf8 = Encoding.UTF8;
+        // private string EncodeTis620Internal(string input)
+        // {   
+        //     Encoding tis620 = Encoding.GetEncoding("TIS-620");
+        //     Encoding utf8 = Encoding.UTF8;
 
-            byte[] tis620Bytes = tis620.GetBytes(input);
-            byte[] utf8Bytes = Encoding.Convert(tis620, utf8, tis620Bytes);
+        //     byte[] tis620Bytes = tis620.GetBytes(input);
+        //     byte[] utf8Bytes = Encoding.Convert(tis620, utf8, tis620Bytes);
 
-            string result = Encoding.UTF8.GetString(utf8Bytes);
+        //     string result = Encoding.UTF8.GetString(utf8Bytes);
 
-            return result;
-        }
+        //     return result;
+        // }
 
         // [HttpPost("convertTis620ToUtf8File")]
         // public IActionResult ConvertTis620ToUtf8File()

@@ -8,7 +8,7 @@ namespace DataEncodingApi.Interfaces.IServices
       [OperationContract]
       string EncodeToUtf8(string input);
 
-      [OperationContract]
-      string EncodeToTis620(string input);
+      // [OperationContract]
+      // string EncodeToTis620(string input);
   }
 }
