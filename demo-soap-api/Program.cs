@@ -34,7 +34,7 @@ app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
     endpoints.UseSoapEndpoint<IEncodingService>(
-        "/soap/encoding.asmx",
+        "/dataEncoding/encodeToUtf8",
         new SoapEncoderOptions(),
         SoapSerializer.XmlSerializer
     );

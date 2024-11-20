@@ -41,15 +41,15 @@ namespace DataEncodingApi.Controllers
             return CreateSoapResponse("EncodeToUtf8", encodedString, encodedStringEng, "utf-8");
         }
 
-        [HttpPost("encodeToTis620")]
-        public IActionResult EncodeToTis620()
-        {
-            string textFixed = "สวัสดีชาวไทย";
-            string textFixedEng = "Hello Thai people";
-            string encodedString = EncodeTis620Internal(textFixed);
-            string encodedStringEng = EncodeTis620Internal(textFixedEng);
-            return CreateSoapResponse("EncodeToTis620", encodedString, encodedStringEng, "utf-8");
-        }
+        // [HttpPost("encodeToTis620")]
+        // public IActionResult EncodeToTis620()
+        // {
+        //     string textFixed = "สวัสดีชาวไทย";
+        //     string textFixedEng = "Hello Thai people";
+        //     string encodedString = EncodeTis620Internal(textFixed);
+        //     string encodedStringEng = EncodeTis620Internal(textFixedEng);
+        //     return CreateSoapResponse("EncodeToTis620", encodedString, encodedStringEng, "utf-8");
+        // }
 
         private string EncodeUtf8Internal(string input)
         {
@@ -70,20 +70,20 @@ namespace DataEncodingApi.Controllers
             return result;
         }
 
-        [HttpPost("convertTis620ToUtf8File")]
-        public IActionResult ConvertTis620ToUtf8File()
-        {
-            Encoding tis620 = Encoding.GetEncoding("TIS-620");
-            Encoding utf8 = Encoding.UTF8;
+        // [HttpPost("convertTis620ToUtf8File")]
+        // public IActionResult ConvertTis620ToUtf8File()
+        // {
+        //     Encoding tis620 = Encoding.GetEncoding("TIS-620");
+        //     Encoding utf8 = Encoding.UTF8;
 
-            byte[] tis620Bytes = tis620.GetBytes("สวัสดี");
-            byte[] utf8Bytes = Encoding.Convert(tis620, utf8, tis620Bytes);
+        //     byte[] tis620Bytes = tis620.GetBytes("สวัสดี");
+        //     byte[] utf8Bytes = Encoding.Convert(tis620, utf8, tis620Bytes);
 
-            return new FileContentResult(utf8Bytes, "text/plain; charset=utf-8")
-            {
-                FileDownloadName = "ConvertedToUtf8.txt"
-            };
-        }
+        //     return new FileContentResult(utf8Bytes, "text/plain; charset=utf-8")
+        //     {
+        //         FileDownloadName = "ConvertedToUtf8.txt"
+        //     };
+        // }
 
         private ContentResult CreateSoapResponse(string methodName, string encodedInput, string encodedInputEng, string charset)
         {
