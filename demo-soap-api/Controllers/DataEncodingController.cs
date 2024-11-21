@@ -90,17 +90,71 @@ namespace DataEncodingApi.Controllers
             string safeEncodedInput = System.Security.SecurityElement.Escape(encodedInput);
             string safeEncodedInputEng = System.Security.SecurityElement.Escape(encodedInputEng);
 
-            string responseXml = $@"
-            <s:Envelope xmlns:s='http://schemas.xmlsoap.org/soap/envelope/'>
-            <s:Body>
-                <{methodName}Response xmlns='http://tempuri.org/'>
-                    <{methodName}Result>
-                        <EncodedString>{safeEncodedInput}</EncodedString>
-                        <EncodedStringEng>{safeEncodedInputEng}</EncodedStringEng>
-                    </{methodName}Result>
-                </{methodName}Response>
-            </s:Body>
-            </s:Envelope>";
+            string responseXml = $@"<?xml version=""1.0"" encoding=""utf-8""?>
+            <soap:Envelope xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/"" 
+                        xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" 
+                        xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+                <soap:Body>
+                    <ClaimsKnockReqResponse xmlns=""https://www.bangkokinsurance.com/RECOVERY_GATEWAY_EX_WS/S_CheckClaimKnock.asmx"">
+                        <ClaimsKnockReqResult>
+                            <RecordGUID>27675a23-439a-bf01-e063-dbf01e063c32810ac98ba</RecordGUID>
+                            <SPName>BKI</SPName>
+                            <PolicyNumber>622-70331-2770</PolicyNumber>
+                            <EffectiveDt>2022-01-16T00:00:00</EffectiveDt>
+                            <ExpirationDt>2023-01-16T00:00:00</ExpirationDt>
+                            <PersonName>-</PersonName>
+                            <PolicyTypeCd>1</PolicyTypeCd>
+                            <VehTypeCd>110</VehTypeCd>
+                            <Registration>2ขพ6552 กท</Registration>
+                            <Manufacturer>HONDA</Manufacturer>
+                            <Model>JAZZ 1.5  (NEW) S CVT (2015-)</Model>
+                            <ChassisSerialNumber>MRHGK5830MT107486</ChassisSerialNumber>
+                            <EngineSerialNumber>L15Z24619429</EngineSerialNumber>
+                            <Displacement>1500</Displacement>
+                            <GrossVehOrCombinedWeight>0</GrossVehOrCombinedWeight>
+                            <SeatingCapacity>7</SeatingCapacity>
+                            <Coverages>
+                                <Coverage>
+                                    <CoverageCd>LPD</CoverageCd>
+                                    <CoverageDesc>ความรับผิดต่อทรัพย์สิน</CoverageDesc>
+                                    <Limit>
+                                        <LimitAmt>5000000</LimitAmt>
+                                    </Limit>
+                                </Coverage>
+                                <Coverage>
+                                    <CoverageCd>COLL</CoverageCd>
+                                    <CoverageDesc>ความเสียหายต่อรถยนต์</CoverageDesc>
+                                    <Limit>
+                                        <LimitAmt>500000</LimitAmt>
+                                    </Limit>
+                                </Coverage>
+                                <Coverage>
+                                    <CoverageCd>FT</CoverageCd>
+                                    <CoverageDesc>รถยนต์สูญหาย/ไฟไหม้</CoverageDesc>
+                                    <Limit>
+                                        <LimitAmt>500000</LimitAmt>
+                                    </Limit>
+                                </Coverage>
+                            </Coverages>
+                            <ClaimOccurences>
+                                <ClaimOccurence>
+                                    <ClaimNoticeCd>CLAIM</ClaimNoticeCd>
+                                    <ItemIdInfo>2301331966</ItemIdInfo>
+                                    <NotifyNumber>2023002262</NotifyNumber>
+                                    <LossDt>2023-01-03T00:00:00</LossDt>
+                                    <KfkStatus>Y</KfkStatus>
+                                    <ReserveAmt>10276.70</ReserveAmt>
+                                    <PaymentAmt>10276.70</PaymentAmt>
+                                    <PaymentTypeCd>Final</PaymentTypeCd>
+                                    <InDisputeInd>Y</InDisputeInd>
+                                </ClaimOccurence>
+                            </ClaimOccurences>
+                            <TransactionResponseDt>{DateTime.UtcNow:yyyy-MM-ddTHH:mm:ss}</TransactionResponseDt>
+                            <MsgStatusCd>Success</MsgStatusCd>
+                        </ClaimsKnockReqResult>
+                    </ClaimsKnockReqResponse>
+                </soap:Body>
+            </soap:Envelope>";
 
             return new ContentResult
             {
@@ -109,5 +163,6 @@ namespace DataEncodingApi.Controllers
                 StatusCode = 200
             };
         }
+
     }
 }
